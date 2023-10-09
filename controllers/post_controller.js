@@ -15,18 +15,20 @@ const createPost = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-    
+
     }
-
-
-
-
 
 }
 
 
-const getAllPosts = (req, res) => {
+const getAllPosts = async(req, res) => {
+   try {
+    const posts = await Post.find({});
+    res.status(200).json({posts, length:posts.length});
+   } catch (error) {
+     console.log(error);
 
+   }
 }
 
 

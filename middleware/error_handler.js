@@ -3,9 +3,9 @@ const applicationError = require("../error/application_error");
 
 const errorHandler = (err, req, res, next) => {
     if(err instanceof applicationError) {
-        res.status(err.statusCode).json(err.message);
+        return res.status(err.statusCode).json({error:err.message});
     }
-    res.status(500).json({error:'something went wrong! please try again later'});
+    return res.status(500).json({error:'something went wrong! please try again later'});
 }
 
 module.exports = errorHandler;

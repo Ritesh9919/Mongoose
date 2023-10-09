@@ -14,7 +14,7 @@ const signup = async(req, res, next)=> {
     await User.create({name, email, password});
     res.status(201).json({msg:'Signup successfull'});
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 }
 
@@ -35,7 +35,7 @@ const signin = async(req, res, next)=> {
     res.status(200).json({token:token});
 
    } catch (error) {
-    next(error);
+    console.log(error);
    }
 }
 
