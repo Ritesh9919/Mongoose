@@ -4,6 +4,7 @@ const User = require('../models/User');
 
 const auth = async(req, res, next) => {
   const token = req.headers['authorization'];
+  
   if(!token) {
     throw new applicationError('Unauthorized', 501);
   }
@@ -14,8 +15,9 @@ const auth = async(req, res, next) => {
   } catch (error) {
     throw new applicationError('Unauthorized', 501);
   }
-
-  const user = await User.findOne({userId:payload.userId});
+   
+  const user = await User.findById(payload.userId);
+  
   req.user = user;
   next()
 }

@@ -1,7 +1,26 @@
 
 const Post = require('../models/Post');
+const applicationError = require('../error/application_error');
 
-const createPost = (req, res) => {
+const createPost = async (req, res) => {
+    try {
+        const { content } = req.body;
+        await Post.create({
+            content: content,
+            user: req.user._id
+
+        });
+
+        res.status(201).json({ msg: 'Post created' });
+
+    } catch (error) {
+        console.log(error);
+    
+    }
+
+
+
+
 
 }
 
