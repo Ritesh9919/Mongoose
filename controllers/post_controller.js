@@ -44,8 +44,16 @@ const getSingalPost = async(req, res) => {
 
 }
 
-const updatePost = (req, res) => {
+const updatePost = async(req, res) => {
+   try {
+    const {content} = req.body;
+    const {id} = req.params;
+    const post = await Post.findOneAndUpdate({_id:id}, {$set:{content:content}});
+    res.status(200).json({msg:'Post updated successfully'});
 
+   } catch (error) {
+    console.log(error);
+   }
 }
 
 
