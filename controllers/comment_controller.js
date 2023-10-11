@@ -47,12 +47,25 @@ const getSingalComment = async(req, res) => {
     }
 }
 
-const updateComment = (req, res) => {
-
+const updateComment = async(req, res) => {
+    const {id} = req.params;
+    const {content} = req.body;
+   try {
+    await Comment.findOneAndUpdate({_id:id}, {$set:{content:content}});
+    res.status(200).json({msg:'comment updated successfully'});
+   } catch (error) {
+    console.log(error);
+   }
 }
 
-const deleteComment = (req, res) => {
-
+const deleteComment = async(req, res) => {
+  const {id} = req.params;
+  try {
+    await Comment.findOneAndDelete({_id:id});
+     res.status(200).json({msg:'Comment deleted'});
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {
