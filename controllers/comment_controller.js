@@ -27,8 +27,13 @@ const createComment = async (req, res) => {
 
 
 
-const getAllComments = (req, res) => {
-
+const getAllComments = async(req, res) => {
+  try {
+     const comments = await Comment.find({});
+     res.status(200).json({comments});
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
