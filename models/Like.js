@@ -7,9 +7,9 @@ const likeSchema = new mongoose.Schema({
     },
     likeable:{
         type:mongoose.Schema.Types.ObjectId,
-        refPath:'on_model'
+        refPath:'onModel'
     },
-    on_model:{
+    onModel:{
         type:String,
         enum:['Comment', 'Post']
     }
