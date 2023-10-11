@@ -21,44 +21,50 @@ const createPost = async (req, res) => {
 }
 
 
-const getAllPosts = async(req, res) => {
-   try {
-    const posts = await Post.find({});
-    res.status(200).json({posts, length:posts.length});
-   } catch (error) {
-     console.log(error);
+const getAllPosts = async (req, res) => {
+    try {
+        const posts = await Post.find({});
+        res.status(200).json({ posts, length: posts.length });
+    } catch (error) {
+        console.log(error);
 
-   }
+    }
 }
 
 
-const getSingalPost = async(req, res) => {
-   try {
-      const {id} = req.params;
-      const post = await Post.findById(id);
-      res.status(200).json({post});
-   } catch (error) {
-     console.log(error);
-   }
+const getSingalPost = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findById(id);
+        res.status(200).json({ post });
+    } catch (error) {
+        console.log(error);
+    }
 
 
 }
 
-const updatePost = async(req, res) => {
-   try {
-    const {content} = req.body;
+const updatePost = async (req, res) => {
+    try {
+        const { content } = req.body;
+        const { id } = req.params;
+        await Post.findOneAndUpdate({ _id: id }, { $set: { content: content } });
+        res.status(200).json({ msg: 'Post updated successfully' });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+const deletePost = async(req, res) => {
+  try {
     const {id} = req.params;
-    const post = await Post.findOneAndUpdate({_id:id}, {$set:{content:content}});
-    res.status(200).json({msg:'Post updated successfully'});
-
-   } catch (error) {
-    console.log(error);
-   }
-}
-
-
-const deletePost = (req, res) => {
-
+    await Post.findOneAndDelete({_id:id});
+    res.status(200).json({msg:'Post deleted successfully'});
+  } catch (error) {
+    
+  }
 }
 
 
